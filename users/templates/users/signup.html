@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html lang="fa-IR" dir="rtl">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>هاتف: تشخیص جعل عمیق</title>
+	<link rel="icon" href="{% static 'users/img/favicon.png' %}" type=”image/x-icon”>
+	<link href="{% static 'users/bootstrap.rtl.min.css' %}" rel="stylesheet" crossorigin="anonymous">
+	<link href="{% static 'users/font/Vazirmatn-Variable-font-face.css' %}" rel="stylesheet" crossorigin="anonymous">
+	<link href="{% static 'users/css/signup.css' %}" rel="stylesheet" crossorigin="anonymous">
+</head>
+
+<body class="text-light">
+	<div class="container rounded my-4 my-lg-5 rounded-4 bg-dark">
+		<div class="row row-cols-1 row-cols-md-2 overflow-hidden">
+			<div class="col  overflow-hidden">
+				<div id="image"></div>
+			</div>
+			<div class="col text-center p-5">
+				<h1 class="my-4">ثبت نام</h1>
+				<form action="" method="post">
+						{% csrf_token %}
+						{% for field in form %}
+						<div class="form-floating mb-3">
+							{{ field }}
+							<label class="text-light" for="{{ field.id_for_label }}">{{ field.label }}</label>
+						</div>
+						<div class="text-danger">
+							{{ field.errors }}
+						</div>
+						{% endfor %}
+						<button type="submit" class="btn btn-primary my-4 py-2 w-100">ثبت نام</button>
+						<div class="text-danger">
+							{{ form.non_field_errors }}
+						</div>
+				</form>
+			</div>
+		</div>
+		<script src="{% static 'users/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
+		<script src="{% static 'users/js/index.js' %}" crossorigin="anonymous"></script>
+</body>
+
+</html>

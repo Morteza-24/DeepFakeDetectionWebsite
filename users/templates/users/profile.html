@@ -1,0 +1,32 @@
+{% load static %}
+<!doctype html>
+<html lang="fa-IR" dir="rtl">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>هاتف: تشخیص جعل عمیق</title>
+	<link rel="icon" href="{% static 'users/img/favicon.png' %}" type=”image/x-icon”>
+	<link href="{% static 'users/bootstrap.rtl.min.css' %}" rel="stylesheet" crossorigin="anonymous">
+	<link href="{% static 'users/font/Vazirmatn-Variable-font-face.css' %}" rel="stylesheet" crossorigin="anonymous">
+	<link href="{% static 'users/css/profile.css' %}" rel="stylesheet" crossorigin="anonymous">
+</head>
+
+<body class="bg-dark text-light">
+	<div class="container mt-5"><div class="row justify-content-center">
+		<div class="col-12 col-md-8">
+			<h1>{{ user.first_name }}</h1>
+			<h1>{{ user.last_name }}</h1>
+			<h1 class="text-end">{{ user.phone_number }}</h1>
+			<h1 class="text-end">{{ user.email }}</h1>
+			<form action="/logout/" method="get">
+				<div class="text-center mt-5">
+					<button class="btn btn-danger" type="submit">خروج از حساب</button>
+				</div>
+			</form>
+		</div>
+	</div></div>
+	<script src="{% static 'users/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
+</body>
+
+</html>

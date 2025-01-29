@@ -2,25 +2,22 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 from .forms import SignUpForm, CustomAuthenticationForm, UserUpdateForm
-from django.db.models import Q
+# from django.db.models import Q
 
 def home_view(request):
-    if request.user.is_authenticated:
-        return redirect('view_home')
-    return render(request, 'user/home.html')
+    return render(request, 'users/index.html', {"is_logged_in": request.user.is_authenticated})
 
 def signin_view(request):
     if request.method == 'POST':
         form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            User = get_user_model()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-           
+
             user = authenticate(request, username=username, password=password)
-           
+
             if user is not None:
                 login(request, user)
                 messages.success(request, f"خوش آمدید {user.first_name}!")
@@ -29,8 +26,8 @@ def signin_view(request):
                 messages.error(request, "نام کاربری یا رمز عبور اشتباه است.")
     else:
         form = CustomAuthenticationForm()
-   
-    return render(request, 'user/login.html', {'form': form})
+
+    return render(request, 'users/login.html', {'form': form})
 
 def signup_view(request):
     if request.method == 'POST':
@@ -39,14 +36,14 @@ def signup_view(request):
             user = form.save()
             login(request, user)
             messages.success(request, "ثبت‌نام با موفقیت انجام شد!")
-            return redirect('view_home')
+            return redirect('home')
     else:
         form = SignUpForm()
-    return render(request, 'user/signup.html', {'form': form})
+    return render(request, 'users/signup.html', {'form': form})
 
 @login_required
 def profile_view(request):
-    return render(request, 'user/profile.html', {'user': request.user})
+    return render(request, 'users/profile.html', {'user': request.user})
 
 @login_required
 def profile_edit_view(request):

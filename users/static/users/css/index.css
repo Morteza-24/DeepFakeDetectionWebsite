@@ -1,0 +1,47 @@
+* {
+	font-family: Vazirmatn, sans-serif;
+}
+
+.bg-dark {
+	background-color: #0D0D0D !important;
+}
+
+.text-emphasis,
+.text-emphasis:hover {
+	color: #00FCDB;
+}
+
+#banner {
+	background: url("/static/website/img/banner-img.jpg");
+	background-size: auto;
+	background-repeat: no-repeat;
+	min-height: 99vh;
+}
+
+.nav-link {
+	margin-left: 24px;
+	margin-right: 24px;
+}
+
+.prim {
+	color: #3500FC;
+}
+
+.btn-primary {
+	background-color: #3500FC;
+	border-color: #3500FC;
+}
+
+.btn-primary:hover {
+	background-color: #1e008c;
+	border-color: #1e008c;
+}
+
+@media screen and (max-width: 992px) {
+	#banner {
+		background-size: contain;
+	}
+	.prim, .banner-text {
+		color: white !important;
+	}
+}

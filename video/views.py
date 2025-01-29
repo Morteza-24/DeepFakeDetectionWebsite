@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .forms import UploadVideoForm
+from .ai.video_inference import infer_video
 import os
 
 @login_required
@@ -15,15 +16,14 @@ def upload_video_view(request):
             
             if file_extension not in allowed_extensions:
                 return JsonResponse({'error': 'فرمت فایل معتبر نمی‌باشد. فرمت‌های مجاز: mp4, avi, mov.'}, status=400)
-            
+
             save_path = os.path.join('media/videos', video_file.name)
             with open(save_path, 'wb+') as destination:
                 for chunk in video_file.chunks():
                     destination.write(chunk)
-            return JsonResponse({'message': 'ویدئو با موفقیت آپلود شد!', 'file_path': save_path})
-        else:
-            return JsonResponse({'errors': form.errors}, status=400)
+            result = infer_video(video_file)
+            form = UploadVideoForm()
+            return render(request, 'video/demo.html', {'form': form, 'result': result, 'file_path': save_path})
     else:
         form = UploadVideoForm()
-    return render(request, 'upload_video.html', {'form': form})
-
+    return render(request, 'video/demo.html', {'form': form})

@@ -1,0 +1,31 @@
+* {
+	font-family: Vazirmatn, sans-serif;
+}
+
+.bg-dark {
+	background-color: #0D0D0D !important;
+}
+
+.text-emphasis,
+.text-emphasis:hover {
+	color: #00FCDB;
+}
+
+.nav-link {
+	margin-left: 24px;
+	margin-right: 24px;
+}
+
+.btn-primary {
+	background-color: #3500FC;
+	border-color: #3500FC;
+}
+
+.btn-primary:hover {
+	background-color: #1e008c;
+	border-color: #1e008c;
+}
+
+.prim {
+	color: #3500FC;
+}

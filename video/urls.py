@@ -4,8 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('upload-video/', upload_video_view, name='upload_video'),
-
+    path('', upload_video_view, name='upload_video'),
 ]
 
 if settings.DEBUG:

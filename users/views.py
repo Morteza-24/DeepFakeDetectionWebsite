@@ -11,16 +11,18 @@ from django.utils.translation import gettext_lazy as gt_l
 from django.conf import settings
 from django.utils import translation
 from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 def set_language_view(request):
-    language = request.GET.get('language', settings.LANGUAGE_CODE)
-    
-    if language in dict(settings.LANGUAGES).keys():
-        translation.activate(language)
-        request.session[translation.LANGUAGE_SESSION_KEY] = language
-    
-    return_path = request.META.get('HTTP_REFERER', reverse('home'))
-    return redirect(return_path)
+    lang_code = request.GET.get('language', settings.LANGUAGE_CODE)
+    response = HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('home')))
+
+    if lang_code and lang_code in dict(settings.LANGUAGES).keys():
+        translation.activate(lang_code)
+        request.session[translation.LANGUAGE_SESSION_KEY] = lang_code
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code)
+
+    return response
 
 def home_view(request):
     return render(request, 'users/index.html', {"is_logged_in": request.user.is_authenticated})

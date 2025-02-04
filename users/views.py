@@ -5,6 +5,22 @@ from django.contrib import messages
 # from django.contrib.auth import get_user_model
 from .forms import SignUpForm, CustomAuthenticationForm, UserUpdateForm
 # from django.db.models import Q
+from django.utils.translation import gettext as gt
+from django.utils.translation import gettext_lazy as gt_l
+
+from django.conf import settings
+from django.utils import translation
+from django.urls import reverse
+
+def set_language_view(request):
+    language = request.GET.get('language', settings.LANGUAGE_CODE)
+    
+    if language in dict(settings.LANGUAGES).keys():
+        translation.activate(language)
+        request.session[translation.LANGUAGE_SESSION_KEY] = language
+    
+    return_path = request.META.get('HTTP_REFERER', reverse('home'))
+    return redirect(return_path)
 
 def home_view(request):
     return render(request, 'users/index.html', {"is_logged_in": request.user.is_authenticated})
@@ -20,10 +36,10 @@ def signin_view(request):
 
             if user is not None:
                 login(request, user)
-                messages.success(request, f"خوش آمدید {user.first_name}!")
+                messages.success(request, (gt("خوش آمدید %(name)s!") % {'name' : user.first_name}))
                 return redirect('home')
             else:
-                messages.error(request, "نام کاربری یا رمز عبور اشتباه است.")
+                messages.error(request, gt_l("نام کاربری یا رمز عبور اشتباه است."))
     else:
         form = CustomAuthenticationForm()
 
@@ -35,7 +51,7 @@ def signup_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, "ثبت‌نام با موفقیت انجام شد!")
+            messages.success(request, gt_l("ثبت‌نام با موفقیت انجام شد!"))
             return redirect('home')
     else:
         form = SignUpForm()
@@ -51,7 +67,7 @@ def profile_edit_view(request):
         form = UserUpdateForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request, "پروفایل شما با موفقیت به‌روزرسانی شد.")
+            messages.success(request, gt_l("پروفایل شما با موفقیت به‌روزرسانی شد."))
             return redirect('profile')
     else:
         form = UserUpdateForm(instance=request.user)
@@ -59,5 +75,6 @@ def profile_edit_view(request):
 
 def logout_view(request):
     logout(request)
-    messages.info(request, "شما با موفقیت از حساب کاربری خارج شدید.")
+    messages.info(request, gt_l("شما با موفقیت از حساب کاربری خارج شدید."))
     return redirect('home')
+

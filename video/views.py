@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from .forms import UploadVideoForm
 from .ai.video_inference import infer_video
 import os
+from django.utils.translation import gettext_lazy as _
 
 @login_required
 def upload_video_view(request):
@@ -15,7 +16,7 @@ def upload_video_view(request):
             file_extension = video_file.name.split('.')[-1].lower()
             
             if file_extension not in allowed_extensions:
-                return JsonResponse({'error': 'فرمت فایل معتبر نمی‌باشد. فرمت‌های مجاز: mp4, avi, mov.'}, status=400)
+                return JsonResponse({'error': _('فرمت فایل معتبر نمی‌باشد. فرمت‌های مجاز: mp4, avi, mov.')}, status=400)
 
             save_path = os.path.join('media/videos', video_file.name)
             with open(save_path, 'wb+') as destination:

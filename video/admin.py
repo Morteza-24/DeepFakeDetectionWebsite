@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import UploadVideo
+from django.utils.translation import gettext_lazy as _
 
 class UploadVideoAdmin(admin.ModelAdmin):
     list_display = ('title', 'uploader', 'upload_date')   
@@ -11,7 +12,7 @@ class UploadVideoAdmin(admin.ModelAdmin):
     (None, {
         'fields': ('title', 'file', 'uploader')
     }),
-    ('اطلاعات تاریخ', {
+    (_('اطلاعات تاریخ'), {
         'fields': ('upload_date',),
         'classes': ('collapse',),
     }),

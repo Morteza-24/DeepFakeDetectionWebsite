@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -104,14 +106,22 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'fa-IR'
+LANGUAGES = (
+    ('fa', 'Persian'),  # Farsi as primary language
+    ('en', 'English'),
+)
+
+LANGUAGE_CODE = 'fa-IR'  # Set Persian as the default language
+
+USE_I18N = True       # Activate Django's internationalization system
+USE_L10N = True       # Enable localized formatting of data
+USE_TZ = True         # Enable time zone support
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 
 TIME_ZONE = 'Asia/Tehran'
-
-USE_I18N = True
-
-USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -125,5 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_URL = "/login/"
-MEDIA_URL = '/media/' 
-MEDIA_ROOT = BASE_DIR / 'media'    
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

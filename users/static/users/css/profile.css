@@ -1,0 +1,48 @@
+* {
+	font-family: Vazirmatn, sans-serif;
+}
+
+.bg-dark {
+	background-color: #0D0D0D !important;
+}
+
+.text-emphasis,
+.text-emphasis:hover {
+	color: #00FCDB;
+}
+
+.nav-link {
+	margin-left: 24px;
+	margin-right: 24px;
+}
+
+.position-relative {
+	background-image: url('/static/users/img/lines_4x1.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100vw;
+	height: 35vh;
+}
+
+.position-absolute img {
+	max-width: 125px;
+}
+
+#videos {
+	background-color: #212529;
+}
+
+@media screen and (max-width: 576px) {
+	#navbarSupportedContent {
+		background-color: #212529;
+		border-radius: 12px;
+		padding: 20px;
+		z-index: 1;
+	}
+	.position-relative {
+		height: 20vh;
+	}
+	.position-absolute img {
+		max-width: 100px;
+	}
+}

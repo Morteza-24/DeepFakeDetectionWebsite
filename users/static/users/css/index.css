@@ -12,15 +12,9 @@
 }
 
 #banner {
-	background: url("/static/users/img/banner-img.jpg");
-	background-size: auto;
+	background-size: contain;
 	background-repeat: no-repeat;
-	min-height: 99vh;
-}
-
-.nav-link {
-	margin-left: 24px;
-	margin-right: 24px;
+	min-height: 100vh;
 }
 
 .prim {

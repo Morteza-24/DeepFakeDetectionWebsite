@@ -32,6 +32,5 @@ class CustomUser(AbstractUser):
         return self.email
 
     def save(self, *args, **kwargs):
-        if not self.username:
-            self.username = self.email
+        self.username = self.email
         super().save(*args, **kwargs)

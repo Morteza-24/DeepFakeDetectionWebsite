@@ -1,25 +1,32 @@
 {% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 <!doctype html>
-<html lang="fa-IR" dir="rtl">
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>هاتف: تشخیص جعل عمیق</title>
+	<title>{% translate "هاتف: تشخیص جعل عمیق" %}</title>
 	<link rel="icon" href="{% static 'users/img/favicon.png' %}" type=”image/x-icon”>
+	{% if LANGUAGE_BIDI %}
 	<link href="{% static 'users/bootstrap.rtl.min.css' %}" rel="stylesheet" crossorigin="anonymous">
+	{% else %}
+	<link href="{% static 'users/bootstrap.min.css' %}" rel="stylesheet" crossorigin="anonymous">
+	{% endif %}
 	<link href="{% static 'users/font/Vazirmatn-Variable-font-face.css' %}" rel="stylesheet" crossorigin="anonymous">
 	<link href="{% static 'users/css/signup.css' %}" rel="stylesheet" crossorigin="anonymous">
 </head>
 
 <body class="text-light">
-	<div class="container rounded my-4 my-lg-5 rounded-4 bg-dark">
-		<div class="row row-cols-1 row-cols-md-2 overflow-hidden">
-			<div class="col  overflow-hidden">
+	<div class="container my-4 my-lg-5 rounded rounded-4 bg-dark">
+		<div class="row row-cols-1 row-cols-md-2 overflow-hidden rounded rounded-4">
+			<div class="col overflow-hidden">
 				<div id="image"></div>
 			</div>
 			<div class="col text-center p-5">
-				<h1 class="my-4 my-lg-5">ورود به حساب</h1>
+				<h1 class="my-4 my-lg-5"><b>{% translate "ورود به حساب" %}</b></h1>
 				<form action="" method="post" class="my-lg-5">
 						{% csrf_token %}
 						{% for field in form %}
@@ -34,13 +41,13 @@
 						<div class="text-danger mt-5">
 							{{ form.non_field_errors }}
 						</div>
-						<button type="submit" class="btn btn-primary my-4 my-lg-5 py-2 w-100">ورود</button>
-						<a class="text-light my-5" href="/signup/">حساب کاربری ندارید؟ ثبت نام کنید.</a>
+						<button type="submit" class="btn btn-primary my-4 my-lg-5 py-2 w-100">{% translate "ورود" %}</button>
+						<a class="text-light my-5" href="{% url 'signup' %}">{% translate "حساب کاربری ندارید؟ ثبت نام کنید." %}</a>
 				</form>
 			</div>
 		</div>
 		<script src="{% static 'users/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
-		<script src="{% static 'users/js/index.js' %}" crossorigin="anonymous"></script>
-</body>
+		<script src="{% static 'users/js/setLang.js' %}" crossorigin="anonymous"></script>
+	</body>
 
 </html>

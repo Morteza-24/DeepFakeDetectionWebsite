@@ -11,11 +11,6 @@
 	color: #00FCDB;
 }
 
-.nav-link {
-	margin-left: 24px;
-	margin-right: 24px;
-}
-
 .position-relative {
 	background-image: url('/static/users/img/lines_4x1.png');
 	background-repeat: no-repeat;

@@ -11,11 +11,12 @@ body {
 }
 
 #image {
-	background-image: url("/static/users/img/banner-img.jpg");
+	background-image: url("/static/users/img/banner.rtl.jpg");
 	width: 150%;
 	height: 150%;
 	background-size: contain;
 	background-repeat: no-repeat;
+	translate: -20px;
 }
 
 input {

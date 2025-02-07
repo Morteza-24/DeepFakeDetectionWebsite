@@ -8,19 +8,19 @@ from .forms import SignUpForm, CustomAuthenticationForm, UserUpdateForm
 from django.utils.translation import gettext as gt
 from django.utils.translation import gettext_lazy as gt_l
 
-from django.conf import settings
-from django.utils import translation
-from django.urls import reverse
+# from django.conf import settings
+# from django.utils import translation
+# from django.urls import reverse
 
-def set_language_view(request):
-    language = request.GET.get('language', settings.LANGUAGE_CODE)
-    
-    if language in dict(settings.LANGUAGES).keys():
-        translation.activate(language)
-        request.session[translation.LANGUAGE_SESSION_KEY] = language
-    
-    return_path = request.META.get('HTTP_REFERER', reverse('home'))
-    return redirect(return_path)
+# def set_language_view(request):
+#     language = request.GET.get('language', settings.LANGUAGE_CODE)
+
+#     if language in dict(settings.LANGUAGES).keys():
+#         translation.activate(language)
+#         request.session[translation.LANGUAGE_SESSION_KEY] = language
+
+#     return_path = request.META.get('HTTP_REFERER', reverse('home'))
+#     return redirect(return_path)
 
 def home_view(request):
     return render(request, 'users/index.html', {"is_logged_in": request.user.is_authenticated})
@@ -37,7 +37,8 @@ def signin_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, (gt("خوش آمدید %(name)s!") % {'name' : user.first_name}))
-                return redirect('home')
+                re = request.GET.get("next")
+                return redirect(re if re else 'home')
             else:
                 messages.error(request, gt_l("نام کاربری یا رمز عبور اشتباه است."))
     else:

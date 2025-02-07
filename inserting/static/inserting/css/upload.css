@@ -11,11 +11,6 @@
 	color: #00FCDB;
 }
 
-.nav-link {
-	margin-left: 24px;
-	margin-right: 24px;
-}
-
 .btn-primary {
 	background-color: #3500FC;
 	border-color: #3500FC;
@@ -28,4 +23,8 @@
 
 .prim {
 	color: #3500FC;
+}
+
+#vid-tab, #img-tab, #vid-form, #img-form {
+	transition: all 0.25s;
 }

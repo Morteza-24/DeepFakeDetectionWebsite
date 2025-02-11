@@ -137,3 +137,17 @@ AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_URL = "/login/"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# # Email configuration (Test Mode)
+# '''This will print the email content to the console instead of sending it.'''
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# Email configuration (Production Mode)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'hatefteam@gmail.com'
+EMAIL_HOST_PASSWORD = 'oerv croq myfj amya '
+DEFAULT_FROM_EMAIL = 'hatefteam@gmail.com'

@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm, SetPasswordForm
 from django.core.validators import RegexValidator
 from django.contrib.auth import get_user_model
 from .models import CustomUser
@@ -142,3 +142,42 @@ class UserUpdateForm(BaseUserForm):
                 _('این شماره تلفن قبلاً توسط کاربر دیگری استفاده شده است.')
             )
         return phone_number
+    
+
+class CustomPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(
+        max_length=254,
+        required=True,
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+            'placeholder': _('ایمیل خود را وارد کنید'),
+            'dir': 'ltr'
+        }),
+        label=_('ایمیل')
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
+
+class CustomSetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': _('رمز عبور جدید خود را وارد کنید'),
+            'dir': 'ltr'
+        }),
+        label=_('رمز عبور جدید')
+    )
+    new_password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': _('رمز عبور جدید خود را مجددا وارد کنید'),
+            'dir': 'ltr'
+        }),
+        label=_('تکرار رمز عبور جدید')
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""

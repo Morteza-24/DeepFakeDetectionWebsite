@@ -114,10 +114,25 @@
 			<b>{% translate "تاریخچه فایل‌های آپلود شده" %}</b>
 		</h2>
 		<p class="text-center">{% translate "فایل‌های آپلود شده بعد از ۱۰ روز پاک می‌شوند." %}</p>
+		{% if files %}
+		<div class="container mt-5 px-2 px-md-5">
+			{% for file in files %}
+				<a class="row bg-light text-dark text-decoration-none rounded rounded-4 mb-3 py-3" href="/media/{{ file.file }}">
+					<div class="col">
+						<h6 class="mx-5 my-3">{{ file.title }}</h6>
+					</div>
+					<div class="col">
+						<h6 class="mx-5 my-3 text-end">{{ file.upload_date }}</h6>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+		{% else %}
 		<br><br><br>
 		<h5 class="text-center my-5">
 			{% translate "هنوز فایلی آپلود نشده." %}
 		</h5>
+		{% endif %}
 	</div>
 	<script src="{% static 'users/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
 	<script src="{% static 'users/js/setLang.js' %}" crossorigin="anonymous"></script>

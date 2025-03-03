@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 db.sqlite3
 media/
+vnv/
+inserting/ai/w.pth
+output_pred.jpg

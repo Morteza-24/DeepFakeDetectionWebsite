@@ -1,9 +1,133 @@
-# sample
-
+import os
+import sys
+if not os.getcwd() in sys.path:
+    sys.path.append(os.getcwd())
+import cv2
 import random
+import torch
+import torch.nn as nn
+import numpy as np
+from retinaface.pre_trained_models import get_model
+from inserting.ai.package_utils.transform import final_transform, get_center_scale, get_affine_transform
+from inserting.ai.configs.get_config import load_config
+from inserting.ai.models import *
+from inserting.ai.package_utils.image_utils import crop_by_margin
+from inserting.ai.losses.losses import _sigmoid
+# from inserting.ai.package_utils.utils import vis_heatmap
 
-def infer_video(video):
-	return f'{random.randint(0, 100)}%'
+
+IMAGE_H, IMAGE_W= 256, 256
+PADDING = 0.25
+cfg = "inserting/ai/configs/my_single_test_efn4_fpn_sbi_adv.yaml"
+cfg = load_config(cfg)
+seed = cfg.SEED
+random.seed(seed)
+torch.manual_seed(seed)
+np.random.seed(seed)
+torch.cuda.manual_seed(seed)
+task = cfg.TEST.subtask
+flip_test = cfg.TEST.flip_test
+device_count = torch.cuda.device_count()
+model = build_model(cfg.MODEL, MODELS).to(torch.float64)
+model = load_pretrained(model, cfg.TEST.pretrained)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+resnet_model = get_model("resnet50_2020-07-20", max_size=2048, device=device)
+resnet_model.eval()
+if device_count >= 1:
+    model = nn.DataParallel(model, device_ids=cfg.TEST.gpus).cuda()
+#else:
+#    model = model.cuda()
+test_file = cfg.TEST.test_file
+video_level = cfg.TEST.video_level
+aspect_ratio = cfg.DATASET.IMAGE_SIZE[1]*1.0 / cfg.DATASET.IMAGE_SIZE[0]
+pixel_std = 200
+rot = 0
+transforms = final_transform(cfg.DATASET)
+metrics_base = cfg.METRICS_BASE
+model.eval()
+
 
 def infer_image(image):
-    return f'{random.randint(0,100)}%'
+	image = cv2.imread(image)
+	height, width = image.shape[:-1]
+	image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+	faces = resnet_model.predict_jsons(image)
+	if len(faces) == 0:
+		return "no face"
+	for face_idx in range(len(faces)):
+		x0, y0, x1, y1 = faces[face_idx]['bbox']
+		face_w = x1 - x0
+		face_h = y1 - y0
+		f_c_x0 = max(0, x0 - int(face_w*PADDING))
+		f_c_x1 = min(width, x1 + int(face_w*PADDING))
+		f_c_y0 = max(0, y0 - int(face_h*PADDING))
+		f_c_y1 = min(height, y1 + int(face_h*PADDING))
+		face_crop = image[f_c_y0:f_c_y1, f_c_x0:f_c_x1, :]
+	face_crop = cv2.resize(face_crop, (IMAGE_H, IMAGE_W), interpolation=cv2.INTER_LINEAR)
+	img = crop_by_margin(face_crop, margin=[5, 5])
+	c, s = get_center_scale(img.shape[:2], aspect_ratio, pixel_std=pixel_std)
+	trans = get_affine_transform(c, s, rot, cfg.DATASET.IMAGE_SIZE, pixel_std=pixel_std)
+	input = cv2.warpAffine(img,
+							trans,
+							(int(cfg.DATASET.IMAGE_SIZE[0]), int(cfg.DATASET.IMAGE_SIZE[1])),
+							flags=cv2.INTER_LINEAR,
+							)
+	with torch.no_grad():
+		img_trans = transforms(input/255)#.to(torch.float64)
+		img_trans = torch.unsqueeze(img_trans, 0)
+		if device_count > 0:
+			img_trans = img_trans.cuda(non_blocking=True)
+		outputs = model(img_trans)
+		cls_outputs = outputs[0]['cls']
+		# hm_outputs = outputs[0]['hm']
+		# hm_preds = _sigmoid(hm_outputs).cpu().numpy()
+		# if cfg.TEST.vis_hm:
+		# 	print(f'Heatmap max value --- {hm_preds.max()}')
+		# 	vis_heatmap(img, hm_preds[0], 'output_pred.jpg')
+		label_pred = _sigmoid(cls_outputs).cpu().numpy()
+	return f'{round(label_pred[0][-1]*100)}%'
+
+
+def infer_video(video):
+    # cap_org = cv2.VideoCapture(org_path)
+    # croppedfaces=[]
+    # frame_count_org = int(cap_org.get(cv2.CAP_PROP_FRAME_COUNT))
+    # frame_idxs = np.linspace(0, frame_count_org - 1, num_frames, endpoint=True, dtype=np.int64)
+    # for cnt_frame in range(frame_count_org):
+	# 	try:
+	# 		ret_org, frame_org = cap_org.read()
+	# 		height, width = frame_org.shape[:-1]
+	# 		if not ret_org:
+	# 			tqdm.write('Frame read {} Error! : {}'.format(cnt_frame,os.path.basename(org_path)))
+	# 			continue
+	# 		if cnt_frame not in frame_idxs:
+	# 			continue
+	# 		frame = cv2.cvtColor(frame_org, cv2.COLOR_BGR2RGB)
+			# faces = model.predict_jsons(frame)
+			# try:
+			# 	if len(faces) == 0:
+			# 		print("no face", faces)
+			# 		return
+			# 	face_s_max = -1
+			# 	face_crop = None
+			# 	score_max = -1
+			# 	for face_idx in range(len(faces)):
+			# 		x0, y0, x1, y1 = faces[face_idx]['bbox']
+			# 		face_w = x1 - x0
+			# 		face_h = y1 - y0
+			# 		face_s = face_w * face_h
+			# 		score = faces[face_idx]['score']
+			# 		if face_s > face_s_max and score > score_max:
+			# 			f_c_x0 = max(0, x0 - int(face_w*padding))
+			# 			f_c_x1 = min(width, x1 + int(face_w*padding))
+			# 			f_c_y0 = max(0, y0 - int(face_h*padding))
+			# 			f_c_y1 = min(height, y1 + int(face_h*padding))
+						
+			# 			face_crop = frame_org[f_c_y0:f_c_y1, f_c_x0:f_c_x1, :]
+			# 			face_s_max = face_s
+			# 			score_max = score
+			# except Exception as e:
+			# 	print(e)
+	# 	except:
+	# 		pass
+	return f'{random.randint(0, 100)}%'

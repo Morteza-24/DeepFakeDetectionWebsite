@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-07 15:19+0330\n"
+"POT-Creation-Date: 2025-03-08 04:28+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,13 +22,29 @@ msgstr ""
 msgid "عنوان تصویر را وارد کنید"
 msgstr "enter image title"
 
-#: inserting/forms.py:16 inserting/forms.py:30
+#: inserting/forms.py:17 inserting/forms.py:33
 msgid "فایل آپلودشده معتبر نمی‌باشد."
 msgstr "The uploaded file is not valid."
 
-#: inserting/forms.py:21
+#: inserting/forms.py:22
 msgid "عنوان ویدئو را وارد کنید"
 msgstr "enter video title"
+
+#: inserting/management/commands/delete_old_files.py:9
+msgid "حذف فایل‌هایی که بیش از 10 روز از آپلود آنها گذشته"
+msgstr ""
+
+#: inserting/management/commands/delete_old_files.py:16
+msgid "مشخص کردن تعداد روزهایی که از آپلودشدن فایل‌ها گذشته و باید حذف شوند"
+msgstr ""
+
+#: inserting/management/commands/delete_old_files.py:45
+msgid "هیچ فایلی برای حذف وجود ندارد."
+msgstr ""
+
+#: inserting/management/commands/delete_old_files.py:47
+msgid "{} تصویر و {} ویدئو حذف گردیدند."
+msgstr ""
 
 #: inserting/templates/inserting/upload.html:11
 #: users/templates/users/index.html:11 users/templates/users/login.html:11
@@ -74,39 +90,41 @@ msgid "عنوان ویدئو"
 msgstr "Video Title"
 
 #: inserting/templates/inserting/upload.html:101
-#: inserting/templates/inserting/upload.html:122
+#: inserting/templates/inserting/upload.html:129
 msgid "آپلود فایل"
 msgstr "Upload a File"
 
-#: inserting/templates/inserting/upload.html:106
-msgid "بررسی ویدئو"
-msgstr "Infer Video"
+#: inserting/templates/inserting/upload.html:111
+#: inserting/templates/inserting/upload.html:138
+msgid "بررسی ویدئو با مدل اول"
+msgstr "Infer Video (First Model)"
 
-#: inserting/templates/inserting/upload.html:115
+#: inserting/templates/inserting/upload.html:112
+#: inserting/templates/inserting/upload.html:139
+msgid "بررسی ویدئو با مدل دوم"
+msgstr "Infer Video (Second Model)"
+
+#: inserting/templates/inserting/upload.html:122
 msgid "عنوان تصویر"
 msgstr "Image Title"
 
-#: inserting/templates/inserting/upload.html:127
-msgid "بررسی تصویر"
-msgstr "Infer Image"
-
-#: inserting/templates/inserting/upload.html:135
+#: inserting/templates/inserting/upload.html:148
 msgid "نتیجه بررسی"
 msgstr "Inference Result"
 
-#: inserting/templates/inserting/upload.html:141
+#: inserting/templates/inserting/upload.html:154
 msgid "مرورگر شما از پخش ویدئو پشتیبانی نمی‌کند."
 msgstr "Your browser does not support playing videos."
 
-#: inserting/templates/inserting/upload.html:144
+#: inserting/templates/inserting/upload.html:157
 msgid "میزان جعلی بودن:"
 msgstr "Fakeness Percentage:"
 
-#: inserting/views.py:20
+#: inserting/views.py:21
 msgid "فرمت ویدئو معتبر نمی‌باشد."
 msgstr "The uploaded video format is not valid."
 
-#: inserting/views.py:38
+#: inserting/views.py:44
 msgid "فرمت تصویر معتبر نمی‌باشد."
 msgstr "The uploaded image format is not valid."
 
@@ -142,11 +160,11 @@ msgstr "Enter your last name"
 msgid "نام خانوادگی"
 msgstr "Last Name"
 
-#: users/forms.py:31 users/forms.py:113
+#: users/forms.py:31 users/forms.py:113 users/forms.py:153
 msgid "ایمیل خود را وارد کنید"
 msgstr "Enter your email"
 
-#: users/forms.py:33 users/forms.py:116 users/models.py:17
+#: users/forms.py:33 users/forms.py:116 users/forms.py:156 users/models.py:17
 msgid "ایمیل"
 msgstr "Email"
 
@@ -186,6 +204,22 @@ msgstr "This email has already been used by another user."
 msgid "این شماره تلفن قبلاً توسط کاربر دیگری استفاده شده است."
 msgstr "This phone number has already been used by another user."
 
+#: users/forms.py:167
+msgid "رمز عبور جدید خود را وارد کنید"
+msgstr "Enter your new password"
+
+#: users/forms.py:170
+msgid "رمز عبور جدید"
+msgstr "New Password"
+
+#: users/forms.py:175
+msgid "رمز عبور جدید خود را مجددا وارد کنید"
+msgstr "Re-enter your new password"
+
+#: users/forms.py:178
+msgid "تکرار رمز عبور جدید"
+msgstr "Confirm new Password"
+
 #: users/templates/users/index.html:72 users/templates/users/login.html:44
 msgid "ورود"
 msgstr "Log-In"
@@ -224,21 +258,32 @@ msgstr "Don't Have an Account? Sign-Up."
 msgid "خروج از حساب"
 msgstr "Log-Out"
 
-#: users/templates/users/profile.html:112
+#: users/templates/users/profile.html:114
 msgid "تاریخچه فایل‌های آپلود شده"
 msgstr "Uploaded Files History"
 
-#: users/templates/users/profile.html:114
+#: users/templates/users/profile.html:116
 msgid "فایل‌های آپلود شده بعد از ۱۰ روز پاک می‌شوند."
 msgstr "Uploaded files will be deleted after 10 days."
 
-#: users/templates/users/profile.html:117
+#: users/templates/users/profile.html:133
 msgid "هنوز فایلی آپلود نشده."
 msgstr "No file uploaded yet!"
 
 #: users/templates/users/signup.html:29 users/templates/users/signup.html:41
 msgid "ثبت نام"
 msgstr "Signup"
+
+#: vnv/lib/python3.13/site-packages/sympy/solvers/simplex.py:564
+msgid "x"
+msgstr ""
+
+#: vnv/lib/python3.13/site-packages/sympy/solvers/simplex.py:565
+msgid "y"
+msgstr ""
+
+#~ msgid "بررسی تصویر"
+#~ msgstr "Infer Image"
 
 #~ msgid "اطلاعات تاریخ"
 #~ msgstr "Date Information"

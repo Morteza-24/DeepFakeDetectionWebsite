@@ -3,5 +3,5 @@ __pycache__/
 db.sqlite3
 media/
 vnv/
-inserting/ai/w.pth
+inserting/LAA/w.pth
 output_pred.jpg

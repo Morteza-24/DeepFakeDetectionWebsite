@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 21:05+0330\n"
+"POT-Creation-Date: 2025-03-08 04:28+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,244 +18,264 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\inserting\forms.py:7
+#: inserting/forms.py:7
 msgid "عنوان تصویر را وارد کنید"
 msgstr ""
 
-#: .\inserting\forms.py:16 .\inserting\forms.py:30
+#: inserting/forms.py:17 inserting/forms.py:33
 msgid "فایل آپلودشده معتبر نمی‌باشد."
 msgstr ""
 
-#: .\inserting\forms.py:21
+#: inserting/forms.py:22
 msgid "عنوان ویدئو را وارد کنید"
 msgstr ""
 
-#: .\inserting\management\command\delete_old_files.py:9
+#: inserting/management/commands/delete_old_files.py:9
 msgid "حذف فایل‌هایی که بیش از 10 روز از آپلود آنها گذشته"
 msgstr ""
 
-#: .\inserting\management\command\delete_old_files.py:16
+#: inserting/management/commands/delete_old_files.py:16
 msgid "مشخص کردن تعداد روزهایی که از آپلودشدن فایل‌ها گذشته و باید حذف شوند"
 msgstr ""
 
-#: .\inserting\management\command\delete_old_files.py:45
+#: inserting/management/commands/delete_old_files.py:45
 msgid "هیچ فایلی برای حذف وجود ندارد."
 msgstr ""
 
-#: .\inserting\management\command\delete_old_files.py:47
+#: inserting/management/commands/delete_old_files.py:47
 msgid "{} تصویر و {} ویدئو حذف گردیدند."
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:11
-#: .\users\templates\users\index.html:11 .\users\templates\users\login.html:11
-#: .\users\templates\users\profile.html:11
-#: .\users\templates\users\signup.html:11
+#: inserting/templates/inserting/upload.html:11
+#: users/templates/users/index.html:11 users/templates/users/login.html:11
+#: users/templates/users/profile.html:11 users/templates/users/signup.html:11
 msgid "هاتف: تشخیص جعل عمیق"
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:27
-#: .\users\templates\users\index.html:30
-#: .\users\templates\users\profile.html:30
+#: inserting/templates/inserting/upload.html:27
+#: users/templates/users/index.html:30 users/templates/users/profile.html:30
 msgid "هاتف"
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:36
-#: .\users\templates\users\index.html:39
-#: .\users\templates\users\profile.html:39
+#: inserting/templates/inserting/upload.html:36
+#: users/templates/users/index.html:39 users/templates/users/profile.html:39
 msgid "نمایش دمو"
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:39
-#: .\users\templates\users\index.html:42
-#: .\users\templates\users\profile.html:42
+#: inserting/templates/inserting/upload.html:39
+#: users/templates/users/index.html:42 users/templates/users/profile.html:42
 msgid "درباره ما"
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:42
-#: .\users\templates\users\index.html:45
-#: .\users\templates\users\profile.html:45
+#: inserting/templates/inserting/upload.html:42
+#: users/templates/users/index.html:45 users/templates/users/profile.html:45
 msgid "تماس با ما"
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:66
-#: .\users\templates\users\index.html:70
+#: inserting/templates/inserting/upload.html:66
+#: users/templates/users/index.html:70
 msgid "حساب کاربری"
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:79
+#: inserting/templates/inserting/upload.html:79
 msgid "آپلود ویدئو"
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:86
+#: inserting/templates/inserting/upload.html:86
 msgid "آپلود تصویر"
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:94
+#: inserting/templates/inserting/upload.html:94
 msgid "عنوان ویدئو"
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:101
-#: .\inserting\templates\inserting\upload.html:122
+#: inserting/templates/inserting/upload.html:101
+#: inserting/templates/inserting/upload.html:129
 msgid "آپلود فایل"
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:106
-msgid "بررسی ویدئو"
+#: inserting/templates/inserting/upload.html:111
+#: inserting/templates/inserting/upload.html:138
+msgid "بررسی ویدئو با مدل اول"
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:115
+#: inserting/templates/inserting/upload.html:112
+#: inserting/templates/inserting/upload.html:139
+msgid "بررسی ویدئو با مدل دوم"
+msgstr ""
+
+#: inserting/templates/inserting/upload.html:122
 msgid "عنوان تصویر"
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:127
-msgid "بررسی تصویر"
-msgstr ""
-
-#: .\inserting\templates\inserting\upload.html:135
+#: inserting/templates/inserting/upload.html:148
 msgid "نتیجه بررسی"
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:141
+#: inserting/templates/inserting/upload.html:154
 msgid "مرورگر شما از پخش ویدئو پشتیبانی نمی‌کند."
 msgstr ""
 
-#: .\inserting\templates\inserting\upload.html:144
+#: inserting/templates/inserting/upload.html:157
 msgid "میزان جعلی بودن:"
 msgstr ""
 
-#: .\inserting\views.py:20
+#: inserting/views.py:21
 msgid "فرمت ویدئو معتبر نمی‌باشد."
 msgstr ""
 
-#: .\inserting\views.py:38
+#: inserting/views.py:44
 msgid "فرمت تصویر معتبر نمی‌باشد."
 msgstr ""
 
-#: .\users\admin.py:14
+#: users/admin.py:14
 msgid "اطلاعات شخصی"
 msgstr ""
 
-#: .\users\admin.py:15
+#: users/admin.py:15
 msgid "دسترسی‌ها"
 msgstr ""
 
-#: .\users\admin.py:16
+#: users/admin.py:16
 msgid "مجوزها"
 msgstr ""
 
-#: .\users\admin.py:17
+#: users/admin.py:17
 msgid "تاریخ‌های مهم"
 msgstr ""
 
-#: .\users\forms.py:14
+#: users/forms.py:14
 msgid "نام خود را وارد کنید"
 msgstr ""
 
-#: .\users\forms.py:16 .\users\models.py:9
+#: users/forms.py:16 users/models.py:9
 msgid "نام"
 msgstr ""
 
-#: .\users\forms.py:23
+#: users/forms.py:23
 msgid "نام خانوادگی خود را وارد کنید"
 msgstr ""
 
-#: .\users\forms.py:25 .\users\models.py:13
+#: users/forms.py:25 users/models.py:13
 msgid "نام خانوادگی"
 msgstr ""
 
-#: .\users\forms.py:31 .\users\forms.py:113
+#: users/forms.py:31 users/forms.py:113 users/forms.py:153
 msgid "ایمیل خود را وارد کنید"
 msgstr ""
 
-#: .\users\forms.py:33 .\users\forms.py:116 .\users\models.py:17
+#: users/forms.py:33 users/forms.py:116 users/forms.py:156 users/models.py:17
 msgid "ایمیل"
 msgstr ""
 
-#: .\users\forms.py:40 .\users\models.py:25
+#: users/forms.py:40 users/models.py:25
 msgid "شماره تلفن باید با 09 شروع شود و 11 رقمی باشد."
 msgstr ""
 
-#: .\users\forms.py:44
+#: users/forms.py:44
 msgid "شماره تلفن خود را وارد کنید"
 msgstr ""
 
-#: .\users\forms.py:47 .\users\models.py:22
+#: users/forms.py:47 users/models.py:22
 msgid "شماره تلفن"
 msgstr ""
 
-#: .\users\forms.py:70 .\users\forms.py:121
+#: users/forms.py:70 users/forms.py:121
 msgid "رمز عبور خود را وارد کنید"
 msgstr ""
 
-#: .\users\forms.py:75
+#: users/forms.py:75
 msgid "رمز عبور خود را مجددا وارد کنید"
 msgstr ""
 
-#: .\users\forms.py:79 .\users\forms.py:124
+#: users/forms.py:79 users/forms.py:124
 msgid "رمز عبور"
 msgstr ""
 
-#: .\users\forms.py:80
+#: users/forms.py:80
 msgid "تکرار رمز عبور"
 msgstr ""
 
-#: .\users\forms.py:88
+#: users/forms.py:88
 msgid "این ایمیل قبلاً توسط کاربر دیگری استفاده شده است."
 msgstr ""
 
-#: .\users\forms.py:99 .\users\forms.py:142
+#: users/forms.py:99 users/forms.py:142
 msgid "این شماره تلفن قبلاً توسط کاربر دیگری استفاده شده است."
 msgstr ""
 
-#: .\users\templates\users\index.html:72 .\users\templates\users\login.html:44
+#: users/forms.py:167
+msgid "رمز عبور جدید خود را وارد کنید"
+msgstr ""
+
+#: users/forms.py:170
+msgid "رمز عبور جدید"
+msgstr ""
+
+#: users/forms.py:175
+msgid "رمز عبور جدید خود را مجددا وارد کنید"
+msgstr ""
+
+#: users/forms.py:178
+msgid "تکرار رمز عبور جدید"
+msgstr ""
+
+#: users/templates/users/index.html:72 users/templates/users/login.html:44
 msgid "ورود"
 msgstr ""
 
-#: .\users\templates\users\index.html:72
+#: users/templates/users/index.html:72
 msgid "ثبت‌نام"
 msgstr ""
 
-#: .\users\templates\users\index.html:82
+#: users/templates/users/index.html:82
 msgid "کنترل <nobr><span class='prim'>هوش مصنوعی</span></nobr> مخرب"
 msgstr ""
 
-#: .\users\templates\users\index.html:89
+#: users/templates/users/index.html:89
 msgid "تشخیص تصاویر و ویدیوهای جعل عمیق"
 msgstr ""
 
-#: .\users\templates\users\index.html:92
+#: users/templates/users/index.html:92
 msgid "شناسایی نقاط دستکاری شده"
 msgstr ""
 
-#: .\users\templates\users\index.html:99
+#: users/templates/users/index.html:99
 msgid "شروع کنید"
 msgstr ""
 
-#: .\users\templates\users\login.html:29
+#: users/templates/users/login.html:29
 msgid "ورود به حساب"
 msgstr ""
 
-#: .\users\templates\users\login.html:45
+#: users/templates/users/login.html:45
 msgid "حساب کاربری ندارید؟ ثبت نام کنید."
 msgstr ""
 
-#: .\users\templates\users\profile.html:69
+#: users/templates/users/profile.html:69
 msgid "خروج از حساب"
 msgstr ""
 
-#: .\users\templates\users\profile.html:114
+#: users/templates/users/profile.html:114
 msgid "تاریخچه فایل‌های آپلود شده"
 msgstr ""
 
-#: .\users\templates\users\profile.html:116
+#: users/templates/users/profile.html:116
 msgid "فایل‌های آپلود شده بعد از ۱۰ روز پاک می‌شوند."
 msgstr ""
 
-#: .\users\templates\users\profile.html:119
+#: users/templates/users/profile.html:133
 msgid "هنوز فایلی آپلود نشده."
 msgstr ""
 
-#: .\users\templates\users\signup.html:29
-#: .\users\templates\users\signup.html:41
+#: users/templates/users/signup.html:29 users/templates/users/signup.html:41
 msgid "ثبت نام"
+msgstr ""
+
+#: vnv/lib/python3.13/site-packages/sympy/solvers/simplex.py:564
+msgid "x"
+msgstr ""
+
+#: vnv/lib/python3.13/site-packages/sympy/solvers/simplex.py:565
+msgid "y"
 msgstr ""

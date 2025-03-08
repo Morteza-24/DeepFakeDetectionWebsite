@@ -10,6 +10,7 @@ def image_upload_path(instance, filename):
 class UploadImage(models.Model):
     title = models.CharField(max_length= 50, verbose_name= 'عنوان تصویر')
     file = models.ImageField(upload_to= 'images/', verbose_name= 'فایل تصویر')
+    fakeness = models.IntegerField(default=-1)
     uploader = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete= models.CASCADE,
@@ -27,6 +28,7 @@ def video_upload_path(instance, filename):
 class UploadVideo(models.Model):
     title = models.CharField(max_length= 50, verbose_name= 'عنوان ویدئو')
     file = models.FileField(upload_to= 'videos/', verbose_name= 'فایل ویدئو')
+    fakeness = models.IntegerField(default=-1)
     uploader = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete= models.CASCADE,

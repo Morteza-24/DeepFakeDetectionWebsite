@@ -7,6 +7,7 @@ class UploadImageForm(forms.Form):
     title.widget.attrs.update({"class": "form-control", "placeholder": _('عنوان تصویر را وارد کنید')})
     file = forms.FileField(required=True, label='فایل تصویر')
     file.widget.attrs.update({"class": "form-control"})
+    img_new_model = forms.BooleanField(required=False)
 
     def clean_file(self):
         file = self.cleaned_data.get('file')
@@ -21,6 +22,8 @@ class UploadVideoForm(forms.Form):
     title.widget.attrs.update({"class": "form-control", "placeholder": _('عنوان ویدئو را وارد کنید')})
     file = forms.FileField(required=True, label='فایل ویدئو')
     file.widget.attrs.update({"class": "form-control"})
+    vid_new_model = forms.BooleanField(required=False)
+    vid = forms.BooleanField(required=False, initial=True)
 
     def clean_file(self):
         file = self.cleaned_data.get('file')

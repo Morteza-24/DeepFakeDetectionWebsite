@@ -5,7 +5,7 @@ import simplejson as json
 import cv2
 import numpy as np
 import torch
-from inserting.ai.losses.losses import _sigmoid
+from inserting.LAA.losses.losses import _sigmoid
 
 
 def file_extention(file_path):

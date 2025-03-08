@@ -150,7 +150,7 @@ TEST:
   flip_test: True
   video_level: True
   # pretrained: 'pretrained/PoseEfficientNet_EFN_hm100_EFPN_NoBasedCLS_Focal_C3_256Cst100_8FXRayv2_SAM(Adam)_ADV_Era1_OutSigmoid_5e5_model_best.pth'
-  pretrained: 'inserting/ai/w.pth'
+  pretrained: 'inserting/LAA/w.pth'
 PREPROCESSING:
   DATASET: FaceForensics
   SPLIT: train

@@ -87,7 +87,7 @@
 						</button>
 					</li>
 				</ul>
-				<form action="?" method="post" enctype="multipart/form-data" id="vid-form" class="mb-5 mt-3 {% if img %}d-none{% endif %}">
+				<form action="" method="post" enctype="multipart/form-data" id="vid-form" class="mb-5 mt-3 {% if img %}d-none{% endif %}">
 					{% csrf_token %}
 					<div class="form-floating mb-3">
 						{{ vid_form.title }}
@@ -103,12 +103,19 @@
 					<div class="text-start text-danger">
 						{{ vid_form.file.errors }}
 					</div>
-					<button type="submit" class="btn btn-primary w-100 mt-4 mb-3 py-2">{% translate "بررسی ویدئو" %}</button>
+					<div class="d-none">
+						{{ vid_form.vid_new_model }}
+						{{ vid_form.vid }}
+					</div>
+					<div class="btn-group w-100 mt-4 mb-3" role="group" aria-label="Infterence">
+						<button type="submit" class="btn btn-primary py-2 border border-2 border-dark" onclick="setModel(true, true)">{% translate "بررسی ویدئو با مدل اول" %}</button>
+						<button type="submit" class="btn btn-primary py-2 border border-2 border-dark" onclick="setModel(true, false)">{% translate "بررسی ویدئو با مدل دوم" %}</button>
+					</div>
 					<div class="text-danger">
 						{{ vid_form.non_field_errors }}
 					</div>
 				</form>
-				<form action="?img" method="post" enctype="multipart/form-data" id="img-form" class="mb-5 mt-3 {% if not img %}d-none{% endif %}">
+				<form action="" method="post" enctype="multipart/form-data" id="img-form" class="mb-5 mt-3 {% if not img %}d-none{% endif %}">
 					{% csrf_token %}
 					<div class="form-floating mb-3">
 						{{ img_form.title }}
@@ -124,7 +131,13 @@
 					<div class="text-start text-danger">
 						{{ img_form.file.errors }}
 					</div>
-					<button type="submit" class="btn btn-primary w-100 mt-4 mb-3 py-2">{% translate "بررسی تصویر" %}</button>
+					<div class="d-none">
+						{{ img_form.img_new_model }}
+					</div>
+					<div class="btn-group w-100 mt-4 mb-3" role="group" aria-label="Infterence">
+						<button type="submit" class="btn btn-primary py-2 border border-2 border-dark" onclick="setModel(false, true)">{% translate "بررسی ویدئو با مدل اول" %}</button>
+						<button type="submit" class="btn btn-primary py-2 border border-2 border-dark" onclick="setModel(false, false)">{% translate "بررسی ویدئو با مدل دوم" %}</button>
+					</div>
 					<div class="text-danger">
 						{{ img_form.non_field_errors }}
 					</div>

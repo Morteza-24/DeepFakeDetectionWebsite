@@ -1,18 +1,19 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-# from django.http import JsonResponse
 from .forms import UploadVideoForm, UploadImageForm
 from .models import UploadVideo, UploadImage
-from .ai.media_inference import infer_video, infer_image
+from .LAA.LAA_inference import LAA_video, LAA_image
+from .SBI.SBI_inference import SBI_video, SBI_image
 import mimetypes
 from django.utils.translation import gettext_lazy as _
+
 
 @login_required
 def upload_view(request):
     if request.method == 'POST':
-        if request.GET.get("img") == None:
+        if request.POST.get("vid"):
             vid_form = UploadVideoForm(request.POST, request.FILES)
-            img_form = UploadVideoForm()
+            img_form = UploadImageForm()
             if vid_form.is_valid():
                 video_file = vid_form.cleaned_data['file']
                 file_type, _ = mimetypes.guess_type(video_file.name)
@@ -25,9 +26,14 @@ def upload_view(request):
                     uploader = request.user
                 )
                 uploaded_video.save()
-                result = infer_video(uploaded_video.file.path)
+                if vid_form.cleaned_data.get("vid_new_model"):
+                    result = LAA_video(uploaded_video.file.path)
+                else:
+                    result = SBI_video(uploaded_video.file.path)
+                uploaded_video.fakeness = result
+                uploaded_video.save()
                 vid_form = UploadVideoForm()
-                return render(request, 'inserting/upload.html', {'vid_form': vid_form, 'img_form': img_form, 'result': result, 'file_path': uploaded_video.file.url})
+                return render(request, 'inserting/upload.html', {'vid_form': vid_form, 'img_form': img_form, 'result': f"{result}%", 'file_path': uploaded_video.file.url})
         else:
             img_form = UploadImageForm(request.POST, request.FILES)
             vid_form = UploadVideoForm()
@@ -43,10 +49,16 @@ def upload_view(request):
                     uploader = request.user
                 )
                 uploaded_image.save()
-                result = infer_image(uploaded_image.file.path)
-                img_form = UploadVideoForm()
-                return render(request, 'inserting/upload.html', {'vid_form': vid_form, 'img_form': img_form, 'result': result, 'file_path': uploaded_image.file.url, 'img': True})
+                if img_form.cleaned_data.get("img_new_model"):
+                    result = LAA_image(uploaded_image.file.path)
+                else:
+                    result = SBI_image(uploaded_image.file.path)
+                uploaded_image.fakeness = result
+                uploaded_image.save()
+                img_form = UploadImageForm()
+                return render(request, 'inserting/upload.html', {'vid_form': vid_form, 'img_form': img_form, 'result': f"{result}%", 'file_path': uploaded_image.file.url, 'img': True})
     else:
         vid_form = UploadVideoForm()
         img_form = UploadImageForm()
-    return render(request, 'inserting/upload.html', {'vid_form': vid_form, 'img_form': img_form, 'img': request.GET.get("img") != None})
+    img = (request.method == 'POST') and (not request.POST.get("vid"))
+    return render(request, 'inserting/upload.html', {'vid_form': vid_form, 'img_form': img_form, 'img': img})

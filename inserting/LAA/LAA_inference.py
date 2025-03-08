@@ -8,17 +8,17 @@ import torch
 import torch.nn as nn
 import numpy as np
 from retinaface.pre_trained_models import get_model
-from inserting.ai.package_utils.transform import final_transform, get_center_scale, get_affine_transform
-from inserting.ai.configs.get_config import load_config
-from inserting.ai.models import *
-from inserting.ai.package_utils.image_utils import crop_by_margin
-from inserting.ai.losses.losses import _sigmoid
-# from inserting.ai.package_utils.utils import vis_heatmap
+from inserting.LAA.package_utils.transform import final_transform, get_center_scale, get_affine_transform
+from inserting.LAA.configs.get_config import load_config
+from inserting.LAA.models import *
+from inserting.LAA.package_utils.image_utils import crop_by_margin
+from inserting.LAA.losses.losses import _sigmoid
+# from inserting.LAA.package_utils.utils import vis_heatmap
 
 
 IMAGE_H, IMAGE_W= 256, 256
 PADDING = 0.25
-cfg = "inserting/ai/configs/my_single_test_efn4_fpn_sbi_adv.yaml"
+cfg = "inserting/LAA/configs/my_single_test_efn4_fpn_sbi_adv.yaml"
 cfg = load_config(cfg)
 seed = cfg.SEED
 random.seed(seed)
@@ -47,7 +47,7 @@ metrics_base = cfg.METRICS_BASE
 model.eval()
 
 
-def infer_image(image):
+def LAA_image(image):
 	image = cv2.imread(image)
 	height, width = image.shape[:-1]
 	image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -85,10 +85,10 @@ def infer_image(image):
 		# 	print(f'Heatmap max value --- {hm_preds.max()}')
 		# 	vis_heatmap(img, hm_preds[0], 'output_pred.jpg')
 		label_pred = _sigmoid(cls_outputs).cpu().numpy()
-	return f'{round(label_pred[0][-1]*100)}%'
+	return round(label_pred[0][-1]*100)
 
 
-def infer_video(video):
+def LAA_video(video):
 	cap = cv2.VideoCapture(video)
 	frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 	frame_idxs = np.linspace(0, frame_count - 1, 32, endpoint=True, dtype=np.int64)
@@ -147,4 +147,4 @@ def infer_video(video):
 			# 	print(f'Heatmap max value --- {hm_preds.max()}')
 			# 	vis_heatmap(img, hm_preds[0], 'output_pred.jpg')
 	label_pred = _sigmoid(cat_outputs.mean()).cpu().numpy()
-	return f'{round(label_pred*100)}%'
+	return round(label_pred*100)

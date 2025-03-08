@@ -8,7 +8,7 @@ if not os.getcwd() in sys.path:
 
 from torch.nn import Sequential
 
-from inserting.ai.register.register import Registry, build_from_cfg
+from inserting.LAA.register.register import Registry, build_from_cfg
 
 
 def build_model_from_cfg(cfg, registry, default_args=None):

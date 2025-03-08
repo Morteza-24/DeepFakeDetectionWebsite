@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 from typing import Any, Dict, Optional
 
-from inserting.ai.register.register import Registry, build_from_cfg
+from inserting.LAA.register.register import Registry, build_from_cfg
 
 
 LOSSES = Registry('Loss')

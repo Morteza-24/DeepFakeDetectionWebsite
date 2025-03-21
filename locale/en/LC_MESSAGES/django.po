@@ -97,12 +97,12 @@ msgstr "Upload a File"
 #: inserting/templates/inserting/upload.html:111
 #: inserting/templates/inserting/upload.html:138
 msgid "بررسی ویدئو با مدل اول"
-msgstr "Infer Video (First Model)"
+msgstr "Infer (First Model)"
 
 #: inserting/templates/inserting/upload.html:112
 #: inserting/templates/inserting/upload.html:139
 msgid "بررسی ویدئو با مدل دوم"
-msgstr "Infer Video (Second Model)"
+msgstr "Infer (Second Model)"
 
 #: inserting/templates/inserting/upload.html:122
 msgid "عنوان تصویر"

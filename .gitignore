@@ -4,4 +4,6 @@ db.sqlite3
 media/
 vnv/
 inserting/LAA/w.pth
+inserting/SBI/w.tar
 output_pred.jpg
+test.png

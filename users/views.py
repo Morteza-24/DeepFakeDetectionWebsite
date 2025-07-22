@@ -75,8 +75,8 @@ def signup_view(request):
 
 @login_required
 def profile_view(request):
-    user_images = request.user.uploaded_images.values("title", "file", "upload_date")
-    user_videos = request.user.uploaded_videos.values("title", "file", "upload_date")
+    user_images = request.user.uploaded_images.values("title", "file", "upload_date", "fakeness")
+    user_videos = request.user.uploaded_videos.values("title", "file", "upload_date", "fakeness")
     files = list(chain(user_images, user_videos))
     return render(request, 'users/profile.html', {
         'user': request.user,
